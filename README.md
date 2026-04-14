@@ -117,31 +117,61 @@ Sistema-de-Gerenciamento-de-E-Commerce---Rocket/
 ## Funcionalidades
 
 ### Dashboard
-- Cards com métricas principais: total de pedidos, receita total, ticket médio e taxa de entrega no prazo
-- Gráfico de área com volume de pedidos por mês
-- Gráfico de barras horizontal com distribuição de status dos pedidos (com cores e percentuais)
-- Tabela com os top 5 produtos mais vendidos
+
+Visão executiva do negócio em tempo real, alimentada diretamente pelo banco de dados.
+
+- **KPIs principais** — 4 cards de destaque: total de pedidos, receita total acumulada, ticket médio por pedido e percentual de entregas realizadas no prazo
+- **Gráfico de volume mensal** — área preenchida com evolução mês a mês do número de pedidos, ideal para identificar sazonalidade e tendências
+- **Distribuição de status** — gráfico de barras horizontal com todos os status de pedidos (entregue, enviado, cancelado, etc.), cada barra com sua cor característica e percentual calculado sobre o total
+- **Ranking de produtos** — tabela com os top 5 produtos mais vendidos, exibindo nome, categoria, unidades vendidas e receita gerada por cada um
+
+---
 
 ### Produtos
-- Listagem em grid ou tabela com paginação (20 por página)
-- Busca por nome do produto com debounce
-- Filtro por categoria (carregado dinamicamente da API)
-- Ordenação: mais vendidos, melhor avaliados, nome A-Z / Z-A
-- Imagens de categoria vindas do banco de dados
-- Criar, editar e excluir produtos com feedback via toast
-- Modal de detalhes com: dimensões, estatísticas de vendas (unidades, receita, preço médio) e lista de avaliações reais
+
+CRUD completo com visualização rica e filtros avançados sobre o catálogo de produtos.
+
+- **Duas visualizações** — alterna entre grid de cards (com imagem de categoria, nome, média de avaliação e total de avaliações) e tabela compacta com dimensões físicas (peso, comprimento, altura, largura)
+- **Busca inteligente** — campo com debounce de 400ms que filtra produtos por nome em tempo real, sem recarregar a página
+- **Filtro por categoria** — dropdown carregado dinamicamente da API, listando todas as categorias existentes no banco
+- **Ordenação múltipla** — mais vendidos (padrão), melhor avaliados, nome A–Z e nome Z–A
+- **Paginação server-side** — 20 produtos por página, navegação com controles de página
+- **Imagens de categoria** — cada card exibe a imagem correspondente à categoria do produto, vinda do banco de dados
+- **Criar produto** — formulário modal com campos: nome, categoria (dropdown), peso, comprimento, altura e largura
+- **Editar produto** — mesmo formulário pré-preenchido com os dados atuais, via PUT na API
+- **Excluir produto** — modal de confirmação antes da exclusão definitiva
+- **Modal de detalhes** — ao clicar em um produto, abre painel com dimensões físicas completas, estatísticas de vendas (unidades vendidas, receita total, preço médio) e lista completa de avaliações reais feitas por clientes
+- **Feedback via toast** — notificações de sucesso e erro para todas as operações de criação, edição e exclusão
+
+---
 
 ### Pedidos
-- Tabela paginada com todos os pedidos ordenados por data
-- Filtro por status (entregue, enviado, cancelado, etc.)
-- Busca por nome do cliente ou ID do pedido
-- Modal de detalhes com: status colorido, valor total, datas, informações logísticas (prazo vs real), dados do cliente (cidade/estado), tabela de itens com produto/vendedor/preço/frete e avaliações
 
-### UX
-- Tema dark/light com persistência no localStorage
-- Todos os modais centralizados na tela
-- Loading states e tratamento de erros em todas as páginas
-- Animações com Framer Motion
+Consulta e acompanhamento completo de todos os pedidos do e-commerce.
+
+- **Tabela paginada** — listagem de pedidos ordenados por data de compra (mais recentes primeiro), com colunas: ID do pedido, nome do cliente, status, quantidade de itens, valor total e data
+- **Filtro por status** — dropdown com todos os status disponíveis (entregue, enviado, cancelado, processando, etc.), com badge colorido indicativo
+- **Busca local** — campo de texto que filtra simultaneamente por nome do cliente ou ID do pedido
+- **Paginação** — navegação por páginas com contador de total de resultados
+- **Modal de detalhes do pedido** — ao clicar em qualquer linha da tabela, exibe:
+  - Status com badge colorido
+  - Valor total do pedido
+  - Datas de compra, entrega estimada e entrega real
+  - Análise logística: dias de entrega real vs estimado, com indicação visual de atraso ou pontualidade
+  - Dados do cliente: nome, cidade e estado
+  - Tabela de itens: nome do produto, vendedor responsável, preço unitário e frete por item
+  - Avaliações do pedido: nota, título e comentário deixados pelo cliente
+
+---
+
+### UX & Interface
+
+- **Tema dark/light** — alternância entre modo escuro e claro com persistência no `localStorage`
+- **Sidebar responsiva** — navegação lateral com ícones e labels, visível apenas em telas `lg+`
+- **Modais centralizados** — todos os modais são renderizados centralizados na viewport, com backdrop escurecido e fechamento ao clicar fora
+- **Loading states** — skeleton/spinner em todas as páginas enquanto os dados são carregados da API
+- **Tratamento de erros** — mensagens de erro amigáveis em caso de falha nas requisições
+- **Animações** — transições suaves com Framer Motion nos modais e elementos de UI
 
 ---
 
